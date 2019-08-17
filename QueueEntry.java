@@ -116,7 +116,7 @@ public class QueueEntry extends Thread
             String s = null;
             String p = null;
             while ((s = stdInput.readLine()) != null) {
-                System.out.println(s);
+                //System.out.println(s);
                 if (s.indexOf("ERROR") == 0 || s.indexOf("youtube-dl.exe: error") == 0) {
                     //System.out.println("Error");
                     break;
@@ -130,7 +130,7 @@ public class QueueEntry extends Thread
 
             if (p != null) {
                 result = result.substring(result.indexOf(":") + 1);
-                System.out.println(p);
+                //System.out.println(p);
                 String amount = p.substring(27 + result.length());
                 if (amount.indexOf("downloading") != -1)
                 amount = amount.substring(amount.indexOf("downloading") + 12, amount.indexOf("of") - 1);
@@ -155,7 +155,7 @@ public class QueueEntry extends Thread
                 // Show the output from the command prompt
                 String t = null;
                 while ((t = stdInput2.readLine()) != null) {
-                    System.out.println(t);
+                    //System.out.println(t);
                     if (t.indexOf("ERROR") == 0 || t.indexOf("youtube-dl.exe: error") == 0)
                         break;
                     result = t;              
