@@ -13,6 +13,7 @@ public class Main
         new File(System.getProperty("user.home") + File.separator + "AppData" + File.separator + "Roaming" + File.separator + "Youtube-DL GUI").mkdir();
         config = new File(System.getProperty("user.home") + File.separator + "AppData" + File.separator + "Roaming" + File.separator + "Youtube-DL GUI" + File.separator + "config.txt");
         
+        // Generate new config file if not present or if outdated.
         if (config.createNewFile())
         {
             //System.out.println("File Created");
