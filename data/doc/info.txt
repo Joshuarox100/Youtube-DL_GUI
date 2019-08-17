@@ -1,0 +1,8 @@
+Youtube-DL GUI
+
+Version: 0.5.0
+Author: Joshuarox100
+
+Info: This program is designed to provide a user interface for the widely used command line program youtube-dl. This program was created entirely in Java 11 using the BlueJ editor. The GUI generates a command that youtube-dl can process and runs it using youtube-dl in command prompt.
+
+Credits: Joshuarox100, ytdl.org, ffmpeg, AdoptOpenJDK, and faithful testers.
