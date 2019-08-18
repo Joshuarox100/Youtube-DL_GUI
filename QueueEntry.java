@@ -176,7 +176,7 @@ public class QueueEntry extends Thread
                 // Read the output from command prompt
                 String t = null;
                 while ((t = stdInput2.readLine()) != null) {
-                    System.out.println(t);
+                    //System.out.println(t);
                     if (t.indexOf("ERROR") == 0 || t.indexOf("youtube-dl.exe: error") == 0)
                         break;
                     result = t;              
