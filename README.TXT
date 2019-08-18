@@ -2,7 +2,7 @@ Youtube-DL GUI
 -----------------
 Author: Joshuarox100
 Version: 0.5.2
-
+ 
 Changelog
 -----------------
  0.5.2
