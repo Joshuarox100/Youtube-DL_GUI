@@ -9,7 +9,7 @@ Changelog
   - Added some more tooltips.
   - Fixed an issue where videos with a playlist in the link would still appear as a playlist in the queue when "Ignore Linked Playlists" is enabled.
   - Playlist titles are now used if available.
-  O Finally wrote psuedocode for the entire project.
+  - Finally wrote psuedocode for the entire project.
   - Killed some bugs hidden under the rug.
   
  0.5.1
