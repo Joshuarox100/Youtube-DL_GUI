@@ -3,6 +3,7 @@ import java.awt.*;
 import javax.swing.*;
 public class Updater extends Thread
 {
+    // Updates youtube-dl
     public void updateYTDL(){
         Main.menu.console.setText("");
         Main.menu.liveOut.setText("Updating...");

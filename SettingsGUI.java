@@ -124,16 +124,18 @@ public class SettingsGUI extends Frame implements ActionListener, WindowListener
         outputFolder.add(label);
         outputFolder.add(entry);
 
-        //
+        // panel for the middle of the menu
         JPanel middle = new JPanel();
         middle.setLayout(new BoxLayout(middle, BoxLayout.X_AXIS));
         middle.setBackground(foregroundColor);
 
+        // panel for the left half of the layout
         JPanel playlist = new JPanel();
         playlist.setLayout(new BoxLayout(playlist, BoxLayout.Y_AXIS));
         playlist.setPreferredSize(new Dimension(200, 80));
         playlist.setBackground(foregroundColor);
 
+        // checkbox to ignore playlists attached to videos
         list = new JCheckBox();
         list.setText("Ignore Linked Playlists");
         list.setSelected(Boolean.parseBoolean(config[1]));
@@ -142,6 +144,7 @@ public class SettingsGUI extends Frame implements ActionListener, WindowListener
         list.setOpaque(true);
         list.setToolTipText("If a URL for a video also contains a link to a playlist, only download the video.");
 
+        // checkbox to skip unavailable videos when downloading playlists
         skip = new JCheckBox();
         skip.setText("Skip Unavailable Videos");
         skip.setSelected(Boolean.parseBoolean(config[2]));
@@ -150,6 +153,7 @@ public class SettingsGUI extends Frame implements ActionListener, WindowListener
         skip.setOpaque(true);
         skip.setToolTipText("If a video in a playlist is unavailable, continue downloading the rest of the playlist.");
 
+        // checkbox to disable file overwriting.
         overwrite = new JCheckBox();
         overwrite.setText("Overwrite Files");
         overwrite.setSelected(Boolean.parseBoolean(config[3]));
@@ -158,23 +162,28 @@ public class SettingsGUI extends Frame implements ActionListener, WindowListener
         overwrite.setOpaque(true);
         overwrite.setToolTipText("If the video is already downloaded, skip the video (Only applies when format is set to \"default\")");
 
+        // adds checkboxes to panel
         playlist.add(list);
         playlist.add(skip);
         playlist.add(overwrite);
 
+        // right half of the middle panel
         JPanel other = new JPanel();
         //other.setLayout(new BoxLayout(other, BoxLayout.Y_AXIS));
         other.setPreferredSize(new Dimension(230, 80));
         other.setBackground(foregroundColor);
 
+        // panel for theme switching
         JPanel themePnl = new JPanel();
         themePnl.setBackground(foregroundColor);
 
+        // label for themes
         themeLbl = new JLabel("Theme:");
         themeLbl.setFont(new Font("SansSerif", Font.BOLD, 18));
         themeLbl.setBackground(foregroundColor);
         themeLbl.setForeground(textColor);
 
+        // theme selection box
         theme = new JComboBox(themes);
         theme.setPreferredSize(new Dimension(100, 30));
         theme.setSelectedItem(config[5]);
@@ -182,9 +191,11 @@ public class SettingsGUI extends Frame implements ActionListener, WindowListener
         theme.setBackground(backgroundColor);
         theme.setForeground(textColor);
 
+        // adds label and selection box to theme panel
         themePnl.add(themeLbl);
         themePnl.add(theme);
 
+        // checkbox to disable sounds
         sounds = new JCheckBox();
         sounds.setText("Disable Notification Sounds");
         sounds.setSelected(!Boolean.parseBoolean(config[4]));
@@ -193,9 +204,11 @@ public class SettingsGUI extends Frame implements ActionListener, WindowListener
         sounds.setToolTipText("Disables sound effects.");
         sounds.setOpaque(true);
 
+        // adds theme panel and sound checkbox to right panel
         other.add(themePnl);
         other.add(sounds);
 
+        // adds previous panels to middle panel
         middle.add(Box.createHorizontalStrut(25));
         middle.add(playlist);
         middle.add(Box.createHorizontalStrut(6));
@@ -203,14 +216,17 @@ public class SettingsGUI extends Frame implements ActionListener, WindowListener
         middle.add(Box.createHorizontalStrut(1));
         middle.add(other);
 
+        // panel for extra settings
         JPanel extras = new JPanel();
         extras.setBackground(foregroundColor);
 
+        // label for more arguments
         JLabel extraArgs = new JLabel("Extra Arguments:");
         extraArgs.setFont(new Font("SansSerif", Font.BOLD, 16));
         extraArgs.setBackground(foregroundColor);
         extraArgs.setForeground(textColor);
 
+        // textfield to enter more arguments
         args = new JTextField();
         args.setText(config[6]);
         args.setBackground(backgroundColor);
@@ -218,6 +234,7 @@ public class SettingsGUI extends Frame implements ActionListener, WindowListener
         args.setPreferredSize(new Dimension(250, 30));
         args.setToolTipText("Set more arguments for Youtube-DL here.");
 
+        // button to open youtube-dl documentation
         JButton help = new JButton();
         try {
             Image add = ImageIO.read(getClass().getResource("images/Help.png"));
@@ -232,15 +249,19 @@ public class SettingsGUI extends Frame implements ActionListener, WindowListener
         help.setActionCommand("Help");
         help.setToolTipText("Opens the documentation page for Youtube-DL");
 
+        // adds click detection to the button
         help.addActionListener(this);
 
+        // adds components to the extras panel
         extras.add(extraArgs);
         extras.add(args);
         extras.add(help);
 
+        // panel for save and revert
         JPanel applyAndRevert = new JPanel();
         applyAndRevert.setBackground(foregroundColor);
 
+        // button to revert changes
         revert = new JButton("<html><p style=\"text-align:center\"><font size=\"5\">" + "Revert Changes" + "</font></p></html>");
         revert.setBackground(backgroundColor);
         revert.setForeground(textColor);
@@ -249,6 +270,7 @@ public class SettingsGUI extends Frame implements ActionListener, WindowListener
         revert.setToolTipText("Reloads the saved settings.");
         revert.setPreferredSize(new Dimension(205, 40));
 
+        // button to save changes
         apply = new JButton("<html><p style=\"text-align:center\"><font size=\"5\">" + "Save Changes" + "</font></p></html>");
         apply.setBackground(backgroundColor);
         apply.setForeground(textColor);
@@ -257,15 +279,19 @@ public class SettingsGUI extends Frame implements ActionListener, WindowListener
         apply.setToolTipText("Saves the selected settings.");
         apply.setPreferredSize(new Dimension(205, 40));
 
+        // adds buttons to their panel
         applyAndRevert.add(revert);
         applyAndRevert.add(Box.createHorizontalStrut(10));
         applyAndRevert.add(apply);
 
+        // adds click detection to the buttons
         revert.addActionListener(this);
         apply.addActionListener(this);
 
+        // adds a listener to the window
         addWindowListener(this);
 
+        // adds all the panels to the settings tab
         settings.add(Box.createVerticalStrut(16));
         settings.add(outputFolder);
         settings.add(Box.createVerticalStrut(10));
@@ -276,11 +302,14 @@ public class SettingsGUI extends Frame implements ActionListener, WindowListener
         settings.add(applyAndRevert);
         settings.add(Box.createVerticalStrut(16));
 
+        // adds the tab to the window
         menu.addTab("Settings", settings);
 
+        // tab for info about the project
         JPanel about = new JPanel();
         about.setLayout(new BoxLayout(about, BoxLayout.Y_AXIS));
 
+        // textpane for displaying information
         JTextPane info = new JTextPane();
         info.setContentType("text/html");
         info.setFont(new JTextArea().getFont().deriveFont(11.5f));
@@ -289,6 +318,7 @@ public class SettingsGUI extends Frame implements ActionListener, WindowListener
         info.setOpaque(true);
         info.setEditable(false);
 
+        // panel for showing the textpane
         JPanel infoArea = new JPanel();
         infoArea.add(info);
         JScrollPane infoPane = new JScrollPane(infoArea, 
@@ -296,6 +326,7 @@ public class SettingsGUI extends Frame implements ActionListener, WindowListener
         infoPane.setViewportView(info);
         infoPane.setPreferredSize(new Dimension(320, 220));
 
+        // reads the about file and adds it to the textpane
         try {
             BufferedReader br = new BufferedReader(new FileReader(new File("data\\doc\\info.txt")));
             String r = "";
@@ -319,10 +350,12 @@ public class SettingsGUI extends Frame implements ActionListener, WindowListener
             info.setText("info.txt not found");
         }
 
+        // panel for holding the update button
         JPanel updatePanel = new JPanel();
         updatePanel.setBackground(foregroundColor);
         updatePanel.setPreferredSize(new Dimension(420, 40));
 
+        // button to update youtube-dl
         update = new JButton();
         update.setBackground(backgroundColor);
         update.setForeground(textColor);
@@ -332,22 +365,29 @@ public class SettingsGUI extends Frame implements ActionListener, WindowListener
         update.setActionCommand("Update");
         update.setToolTipText("Updates Youtube-DL to the latest version from GitHub");
 
+        // enables or disables the button if downloads are occuring
         if (Main.menu.downloading)
             updateDisable();
         else
             updateEnable();
 
+        // adds click detection to the button
         update.addActionListener(this);
 
+        // adds the button to the panel
         updatePanel.add(update);
 
+        // adds the info pane and update panel to the tab
         about.add(infoPane);
         about.add(updatePanel);
 
+        // adds the tab to the menu
         menu.addTab("About", about);
 
+        // adds the menu to the window
         add(menu);
 
+        // sets the settings for the window
         setTitle("Advanced Settings");
         try {
             Image icon = ImageIO.read(getClass().getResource("images/Settings.png"));
@@ -363,11 +403,13 @@ public class SettingsGUI extends Frame implements ActionListener, WindowListener
         setVisible(true);
     }
 
+    // enables updating
     public void updateEnable() {
         update.setEnabled(true);
         update.setText("<html><p style=\"text-align:center\"><font size=\"5\">" + "Update Youtube-DL" + "</font></p></html>");
     }
 
+    // disables updating
     public void updateDisable() {
         update.setEnabled(false);
         update.setText("<html><p style=\"text-align:center\"><font size=\"5\">" + "Update Youtube-DL" + "</font></p></html>");
@@ -376,24 +418,24 @@ public class SettingsGUI extends Frame implements ActionListener, WindowListener
     @Override
     public void actionPerformed(ActionEvent evt) {
         if (evt.getActionCommand().equals("Save")) {
+            // Save changes
             new Settings(outputFld.getText(), list.isSelected(), skip.isSelected(), overwrite.isSelected(), sounds.isSelected(), theme.getSelectedItem().toString(), args.getText()).start();
             Main.menu.updateSettings();
         }
         else if (evt.getActionCommand().equals("Update")) {
+            // Updates youtube-dl
             update.setEnabled(false);
             update.setText("<html><p style=\"text-align:center\"><font size=\"5\">" + "Updating..." + "</font></p></html>");
             new Updater().start();
         }
         else if (evt.getActionCommand().equals("Choose")) {
+            // Opens file picker
             JFileChooser chooser = new JFileChooser(); 
             chooser.setCurrentDirectory(new java.io.File("."));
             chooser.setDialogTitle("Select a Folder");
             chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-            //
-            // disable the "All files" option.
-            //
             chooser.setAcceptAllFileFilterUsed(false);
-            //    
+            
             if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) { 
                 outputFld.setText(chooser.getSelectedFile() + "\\");
                 list.setSelected(Boolean.parseBoolean(config[1]));
@@ -404,6 +446,7 @@ public class SettingsGUI extends Frame implements ActionListener, WindowListener
             }
         }
         else if (evt.getActionCommand().equals("Revert")) {
+            // Reloads the configuration file.
             try
             {
                 config = Settings.loadSettings();
@@ -434,7 +477,7 @@ public class SettingsGUI extends Frame implements ActionListener, WindowListener
     }
 
     @Override public void windowDeactivated(WindowEvent evt) {
-        // Saves the location of the window when defocused.
+        // Saves the location of the window when defocused if still present.
         if (this.isVisible())
             Main.location = this.getLocationOnScreen();
     }

@@ -4,6 +4,7 @@ public class DisplayUpdater extends Thread
 {
     private String event;
 
+    // Constructors
     public DisplayUpdater() { 
         this.event = "";
     }
@@ -12,6 +13,7 @@ public class DisplayUpdater extends Thread
         this.event = event;
     }
 
+    // Removes an Item from the Queue
     public void run()
     {
         //System.out.println(Main.menu.queue.size());
@@ -27,6 +29,7 @@ public class DisplayUpdater extends Thread
         updateQueue();
     }
 
+    // Updates the Queue Display
     public static void updateQueue() {
         Main.menu.queueDisplay.removeAll();
         for (int i = 0; i < Main.menu.queue.size(); i++)
@@ -41,6 +44,7 @@ public class DisplayUpdater extends Thread
         enableRemove();
     }
     
+    // Prevent a Removal Interrupting Another in Progress
     public static void disableRemove() {
         for (int i = 0; i < Main.menu.queue.size(); i++)
         {
@@ -48,6 +52,7 @@ public class DisplayUpdater extends Thread
         }
     }
     
+    // Re-Enable Remove Buttons
     public static void enableRemove() {
         for (int i = 0; i < Main.menu.queue.size(); i++)
         {

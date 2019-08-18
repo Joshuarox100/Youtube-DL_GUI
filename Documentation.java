@@ -4,6 +4,7 @@ import java.net.*;
 
 public class Documentation extends Thread
 {
+    // Opens a Webpage with the Documentation for youtube-dl
     public void run() {
         openWebpage();
     }

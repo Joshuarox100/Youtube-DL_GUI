@@ -26,7 +26,7 @@ public class Downloader extends Thread
         // Beginning of command
         StringBuilder builder = new StringBuilder();
         builder.append("data\\bin\\ytdl\\youtube-dl.exe ");
-        // Learning Switch
+        // Format Switch
         switch(format) {
             // Audio Formats
             case "mp3":
@@ -72,6 +72,7 @@ public class Downloader extends Thread
                 break;
         }
 
+        // Appends Settings to the Command
         try
         {
             String[] config = Settings.loadSettings();

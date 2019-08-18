@@ -4,10 +4,12 @@ import java.util.*;
 
 public class Stopper extends Thread
 {
+    // Stops Active Downloads
     public void run(){
         String command = "taskkill /F /IM ";
         try
         { 
+            // Finds and Kills All Descendant Processes of youtube-dl and ffmpeg
             for (int i = 0; i < Main.menu.downloads.size(); i++) {
                 Main.menu.downloads.get(i).stop = true;
                 Process curr = Main.menu.downloads.get(i).proc;

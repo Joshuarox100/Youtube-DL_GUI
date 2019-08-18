@@ -11,6 +11,7 @@ public class Settings extends Thread
     private String theme;
     private String args;
 
+    // Constructor
     public Settings(String output, boolean playlist, boolean skip, boolean overwrite, boolean sounds, String theme, String args)
     {
         this.output = output;
@@ -22,6 +23,7 @@ public class Settings extends Thread
         this.args = args;
     }
 
+    // Saves Modified Settings to File
     public void saveSettings(String output, boolean playlist, boolean skip, boolean overwrite, boolean sounds, String theme, String args) throws IOException
     {
         String config = "version=2\n";
@@ -62,6 +64,7 @@ public class Settings extends Thread
 
     }
 
+    // Reads and Returns the Configuration File as an Array
     public static String[] loadSettings() throws Exception
     {
         String[] settings = {System.getProperty("user.home") + File.separator + "Downloads" + File.separator, "true", "true", "true", "false", "Light", "", "0"};
@@ -93,6 +96,7 @@ public class Settings extends Thread
         return settings;
     }
 
+    // Attempts to Save Settings
     public void run()
     {
         try

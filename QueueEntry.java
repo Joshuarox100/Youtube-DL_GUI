@@ -14,12 +14,14 @@ public class QueueEntry extends Thread
     public int end;
     public JButton removeBtn;
 
+    // Constructor
     public QueueEntry(String link, int start, int end, int index) {
         Color backgroundColor;
         Color foregroundColor;
         Color textColor;
         Color extraColor;
 
+        // Sets Color Palette
         if (Main.theme.equals("Dark"))
         {
             backgroundColor = Main.menu.darkMode[0];
@@ -35,30 +37,38 @@ public class QueueEntry extends Thread
             extraColor = Main.menu.lightMode[3];
         }
 
+        // Playlist Limits
         this.start = start;
         this.end = end;
 
+        // Component to be Used
         entry = new JPanel();
         entry.setBackground(extraColor);
         entry.setPreferredSize(new Dimension(300, 32));
 
+        // Place in the Queue
         spot = new JTextField();
         spot.setBackground(backgroundColor);
         spot.setForeground(textColor);
 
+        // Title of Playlist/Video
         name = new JTextField();
         name.setBackground(backgroundColor);
         name.setForeground(textColor);
 
+        // Number of Videos
         count = new JTextField();
         count.setBackground(backgroundColor);
         count.setForeground(textColor);
 
+        // Removes Self From Queue
         removeBtn = new JButton();
         removeBtn.setBackground(foregroundColor);
 
+        // Video Link
         url = link;
 
+        // Setting Component Stuffs
         spot.setHorizontalAlignment(JTextField.CENTER);
         spot.setEditable(false);
         spot.setText(String.valueOf(index));
@@ -89,30 +99,33 @@ public class QueueEntry extends Thread
         entry.add(count);
         entry.add(removeBtn);
 
+        // Refreshes the Display and Starts the Thread
         DisplayUpdater.updateQueue();
         this.start();
     }
 
     private String getTitle(String link) {
+        // Base Values
         String result = "Invalid Link";
         int value = 0;
         try
         { 
             // Launch command prompt and run command
-            String command = "data\\bin\\ytdl\\youtube-dl.exe -s --skip-download ";
+            StringBuilder command = new StringBuilder();
+            command.append("data\\bin\\ytdl\\youtube-dl.exe -s --skip-download ");
             if (Boolean.parseBoolean(Main.menu.config[1]))
-                command = command + "--no-playlist ";
+                command.append("--no-playlist ");
             if (start > 0)
-                command = command + "--playlist-start " + start + " ";
+                command.append("--playlist-start " + start + " ");
             if (end > 0)
-                command = command + "--playlist-end " + end + " ";
-            ProcessBuilder cmd = new ProcessBuilder(new String[] {"cmd", "/C", command + "\"" + link + "\" && exit"});
+                command.append("--playlist-end " + end + " ");
+            ProcessBuilder cmd = new ProcessBuilder(new String[] {"cmd", "/C", command.toString() + "\"" + link + "\" && exit"});
             cmd.redirectErrorStream(true);
             Process proc = cmd.start();
             // Read the output and error log from command prompt
             BufferedReader stdInput = new BufferedReader(new InputStreamReader(proc.getInputStream(), "UTF8"));
 
-            // Show the output from the command prompt
+            // Simulate the Download to Find the Name;
             String s = null;
             String d = null;
             String p = null;
@@ -133,8 +146,9 @@ public class QueueEntry extends Thread
                     break;
                 }             
             }
-
+            // If a Playlist is Detected
             if (p != null) {
+                // Isolate the Name and Number of Videos
                 result = result.substring(result.indexOf(":") + 1);
                 //System.out.println(p);
                 String amount = p.substring(27 + result.length());
@@ -146,6 +160,7 @@ public class QueueEntry extends Thread
                 stdInput.close();
             }
             else if (result.equals("Invalid Link")) {
+                // Check if the Link is Invalid or a Single Video
                 //System.out.println("here");
                 String command2 = "data\\bin\\ytdl\\youtube-dl.exe -e --no-playlist ";
                 if (start > 0)
@@ -158,7 +173,7 @@ public class QueueEntry extends Thread
                 // Read the output and error log from command prompt
                 BufferedReader stdInput2 = new BufferedReader(new InputStreamReader(proc2.getInputStream(), "UTF8"));
 
-                // Show the output from the command prompt
+                // Read the output from command prompt
                 String t = null;
                 while ((t = stdInput2.readLine()) != null) {
                     System.out.println(t);
@@ -177,12 +192,14 @@ public class QueueEntry extends Thread
             e.printStackTrace();
             //Main.menu.console.setText(Main.menu.console.getText() + "Something Broke Here... \n");
         } 
+        // Shorten the title if it's too long
         if (result.length() > 32)
             result = result.substring(0, 31) + "...";
         return result;
     }
 
     public void run() {
+        // Wait for UI to update
         try {
             Thread.sleep(1000);
         }

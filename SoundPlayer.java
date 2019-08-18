@@ -6,12 +6,14 @@ public class SoundPlayer extends Thread
     Clip clip; 
     AudioInputStream stream;
     
+    // Constructor
     public SoundPlayer() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
         stream = AudioSystem.getAudioInputStream(new File("data\\sfx\\Complete.wav").getAbsoluteFile());
         clip = AudioSystem.getClip();
         clip.open(stream);
     }
     
+    // Plays the Sound
     public void run() {
         try {
             SoundPlayer player = new SoundPlayer();
