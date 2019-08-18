@@ -9,7 +9,7 @@ Changelog
   - Added some more tooltips.
   - Fixed an issue where videos with a playlist in the link would still appear as a playlist in the queue when "Ignore Linked Playlists" is enabled.
   - Playlist titles are now used if available.
-  - Finally wrote psuedocode for the entire project.
+  O Finally wrote psuedocode for the entire project.
   - Killed some bugs hidden under the rug.
   
  0.5.1
@@ -55,10 +55,3 @@ Reporting Bugs
 -----------------
  If you encounter any bugs, please contact me on Discord with the handle below.
  - Joshuarox100#5024
-  
- 0.6.0
-  X Window Resizing is now allowed (And scales everything appropriately).
-  X Added support for custom themes (Guide in "docs").
-  X Added interactivity for sites that require a username and password.
-  X Moved project over to GitHub instead of Google Drive.
-  

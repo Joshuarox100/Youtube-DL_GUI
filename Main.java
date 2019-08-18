@@ -10,6 +10,7 @@ public class Main
     
     public static void main(String[] args) throws IOException
     {
+        // Get the path to the config.
         new File(System.getProperty("user.home") + File.separator + "AppData" + File.separator + "Roaming" + File.separator + "Youtube-DL GUI").mkdir();
         config = new File(System.getProperty("user.home") + File.separator + "AppData" + File.separator + "Roaming" + File.separator + "Youtube-DL GUI" + File.separator + "config.txt");
         
@@ -58,6 +59,7 @@ public class Main
             }                
         }
 
+        // Load the menu.
         menu = new GUI();
     }
 }

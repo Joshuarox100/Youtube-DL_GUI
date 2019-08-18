@@ -5,6 +5,7 @@ import javax.imageio.*;
 import java.io.*;
 import misc.*;
 public class SettingsGUI extends Frame implements ActionListener, WindowListener{
+    // Declare all the things.
     private JLabel directory;
     private JLabel themeLbl;
     public JButton update;
@@ -20,9 +21,12 @@ public class SettingsGUI extends Frame implements ActionListener, WindowListener
     private String[] themes = {"Light", "Dark"};
     private String[] config;
 
+    // Settings Menu
     public SettingsGUI(){
+        // Sets the window's layout to vertical.
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
+        // Loads the configuration file.
         try
         {
             config = Settings.loadSettings();
@@ -32,10 +36,12 @@ public class SettingsGUI extends Frame implements ActionListener, WindowListener
             //e.printStackTrace();
         }
 
+        // Declare color palette.
         Color backgroundColor;
         Color foregroundColor;
         Color textColor;
 
+        // Set the color palette based on the current theme.
         if (Main.theme.equals("Dark"))
         {
             backgroundColor = Main.menu.darkMode[0];
@@ -49,34 +55,43 @@ public class SettingsGUI extends Frame implements ActionListener, WindowListener
             textColor = Main.menu.lightMode[2];
         }
 
+        // The menu
         JTabbedPane menu = new JTabbedPane();
         menu.setBackground(backgroundColor);
         menu.setForeground(textColor);
 
+        // Developer Testing
         // for (int i = 0; i < 4; i++)
         // System.out.println("Config " + (i + 1) + ": " + config[i]);
 
+        // Settings tab
         JPanel settings = new JPanel();
         settings.setLayout(new BoxLayout(settings, BoxLayout.Y_AXIS));
         settings.setBackground(foregroundColor);
 
+        // Download folder panel
         JPanel outputFolder = new JPanel();
         outputFolder.setLayout(new GridLayout(2, 1, 0, 0));
         outputFolder.setBackground(foregroundColor);
 
+        // folder label panel
         JPanel label = new JPanel();
         label.setBackground(foregroundColor);
 
+        // actual label
         directory = new JLabel("Download Folder:");
         directory.setFont(new Font("SansSerif", Font.BOLD, 18));
         directory.setBackground(foregroundColor);
         directory.setForeground(textColor);
 
+        // adding label to panel
         label.add(directory);
 
+        // panel for path
         JPanel entry = new JPanel();
         entry.setBackground(foregroundColor);
 
+        // text field for download path
         outputFld = new JTextField();
         outputFld.setText(config[0]);
         outputFld.setPreferredSize(new Dimension(385, 30));
@@ -84,6 +99,7 @@ public class SettingsGUI extends Frame implements ActionListener, WindowListener
         outputFld.setBackground(backgroundColor);
         outputFld.setForeground(textColor);
 
+        // button to open folder picker
         JButton select = new JButton();
         select.setBackground(backgroundColor);
         select.setForeground(textColor);
@@ -98,14 +114,17 @@ public class SettingsGUI extends Frame implements ActionListener, WindowListener
         select.setPreferredSize(new Dimension(28, 28));
         select.setActionCommand("Choose");
 
+        // adding click detection.
         select.addActionListener(this);
 
+        // adding components to panels.
         entry.add(outputFld);
         entry.add(select);
 
         outputFolder.add(label);
         outputFolder.add(entry);
 
+        //
         JPanel middle = new JPanel();
         middle.setLayout(new BoxLayout(middle, BoxLayout.X_AXIS));
         middle.setBackground(foregroundColor);
@@ -212,7 +231,7 @@ public class SettingsGUI extends Frame implements ActionListener, WindowListener
         help.setPreferredSize(new Dimension(30, 30));
         help.setActionCommand("Help");
         help.setToolTipText("Opens the documentation page for Youtube-DL");
-        
+
         help.addActionListener(this);
 
         extras.add(extraArgs);
@@ -404,8 +423,20 @@ public class SettingsGUI extends Frame implements ActionListener, WindowListener
 
     @Override
     public void windowClosing(WindowEvent evt) {
+        // Saves the location of the window and closes it.
         Main.location = this.getLocationOnScreen();
-        dispose(); // Close the window
+        dispose();
+    }
+
+    @Override public void windowActivated(WindowEvent evt) {
+        // Saves location of the window when focused.
+        Main.location = this.getLocationOnScreen();
+    }
+
+    @Override public void windowDeactivated(WindowEvent evt) {
+        // Saves the location of the window when defocused.
+        if (this.isVisible())
+            Main.location = this.getLocationOnScreen();
     }
 
     // Not Used, BUT need to provide an empty body to compile.
@@ -417,7 +448,4 @@ public class SettingsGUI extends Frame implements ActionListener, WindowListener
 
     @Override public void windowDeiconified(WindowEvent evt) {}
 
-    @Override public void windowActivated(WindowEvent evt) {}
-
-    @Override public void windowDeactivated(WindowEvent evt) {}
 }
